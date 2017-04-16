@@ -14,7 +14,6 @@ RUN set -xe && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $commonDeps
 
 RUN set -xe && imagickDeps=" \
-        libmcrypt-dev \
         libgd-dev \
         libmagickwand-dev \
     " && \
