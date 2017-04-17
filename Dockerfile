@@ -39,3 +39,11 @@ RUN set -xe && \
     docker-php-ext-enable mongodb && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $mongoDeps
+
+RUN set -xe && \
+    zmqDeps="git curl wget build-essential uuid-dev libsodium-dev pkg-config" && \
+    apt-get update && \
+    apt-get install -y $zmqDeps && \
+    cd /tmp &&  wget http://download.zeromq.org/zeromq-4.1.2.tar.gz && tar -xvf zeromq-4.1.2.tar.gz && cd zeromq-4.1.2 && ./configure && make && make install && ldconfig -v && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $mongoDeps
