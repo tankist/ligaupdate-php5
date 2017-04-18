@@ -6,22 +6,27 @@ RUN set -xe && \
     commonDeps=" \
         libmcrypt-dev \
         libxml2-dev \
+        zlib1g-dev \
     " && \
     apt-get update && \
     apt-get install -y libmcrypt4 --no-install-recommends && \
     apt-get install -y $commonDeps --no-install-recommends && \
-    docker-php-ext-install pdo_mysql mysqli mcrypt opcache soap && \
+    docker-php-ext-install pdo_mysql mysqli mcrypt opcache soap zip && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $commonDeps
 
 RUN set -xe && imagickDeps=" \
         libgd-dev \
         libmagickwand-dev \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng12-dev \
     " && \
     apt-get update && \
     apt-get install -y libgd3 libmagickwand-6.q16-2 --no-install-recommends && \
     apt-get install -y $imagickDeps --no-install-recommends && \
     NPROC=$(getconf _NPROCESSORS_ONLN) && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install -j${NPROC} gd && \
     pecl install imagick && \
     docker-php-ext-enable imagick && \
