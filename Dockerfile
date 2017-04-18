@@ -39,7 +39,8 @@ RUN set -xe && \
     pecl install mongodb && \
     docker-php-ext-enable mongodb && \
     rm -rf /var/lib/apt/lists/* && \
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $mongoDeps
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $mongoDeps && \
+    ldconfig
 
 RUN set -xe && \
     zmqDeps="git curl wget build-essential uuid-dev libsodium-dev pkg-config" && \
