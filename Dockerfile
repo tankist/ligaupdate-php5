@@ -5,11 +5,12 @@ RUN set -xe && a2enmod rewrite && service apache2 restart
 RUN set -xe && \
     commonDeps=" \
         libmcrypt-dev \
+        libxml2-dev \
     " && \
     apt-get update && \
     apt-get install -y libmcrypt4 --no-install-recommends && \
     apt-get install -y $commonDeps --no-install-recommends && \
-    docker-php-ext-install pdo_mysql mysqli mcrypt opcache && \
+    docker-php-ext-install pdo_mysql mysqli mcrypt opcache soap && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $commonDeps
 
