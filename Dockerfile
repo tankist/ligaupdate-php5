@@ -54,3 +54,6 @@ RUN set -xe && \
     cd /tmp &&  wget http://download.zeromq.org/zeromq-4.1.2.tar.gz && tar -xvf zeromq-4.1.2.tar.gz && cd zeromq-4.1.2 && ./configure && make && make install && ldconfig -v && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $zmqDeps
+
+RUN set -xe && \
+    chown www-data:www-data /var/www/html -R
