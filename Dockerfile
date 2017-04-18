@@ -35,7 +35,7 @@ RUN set -xe && \
             libssl-dev \
         " && \
     apt-get update && \
-    apt-get install -y $mongoDeps --no-install-recommends && \
+    apt-get install -y $mongoDeps libcurl3 --no-install-recommends && \
     pecl install mongodb && \
     docker-php-ext-enable mongodb && \
     rm -rf /var/lib/apt/lists/* && \
