@@ -23,7 +23,7 @@ RUN set -xe && imagickDeps=" \
         libpng12-dev \
     " && \
     apt-get update && \
-    apt-get install -y libgd3 libmagickwand-6.q16-2 --no-install-recommends && \
+    apt-get install -y libgd3 libmagickwand-6.q16-2 imagemagick --no-install-recommends && \
     apt-get install -y $imagickDeps --no-install-recommends && \
     NPROC=$(getconf _NPROCESSORS_ONLN) && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
